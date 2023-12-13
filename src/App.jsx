@@ -1,46 +1,53 @@
-import React from 'react';
+// App.jsx
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, deleteContact, updateFilter } from './contactsSlice';
-import ContactForm from './components/ContactForm/ContactForm';
-import ContactList from './components/ContactList/ContactList';
-import Filter from './components/Filter/Filter';
-import styles from './App.module.css';
-import { v4 as uuidv4 } from 'uuid';
+import { fetchContacts, addContact, deleteContact } from './contactsSlice';
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  const contacts = useSelector((state) => state.contacts.items);
+  const isLoading = useSelector((state) => state.contacts.isLoading);
+  const error = useSelector((state) => state.contacts.error);
 
-  const handleAddContact = (name, number) => {
-    dispatch(addContact({ id: uuidv4(), name, number }));
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const handleAddContact = (newContact) => {
+    dispatch(addContact(newContact));
   };
 
-  const handleDeleteContact = id => {
-    dispatch(deleteContact(id));
+  const handleDeleteContact = (contactId) => {
+    dispatch(deleteContact(contactId));
   };
-
-  const handleFilterChange = e => {
-    dispatch(updateFilter(e.target.value));
-  };
-
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
 
   return (
-    <div className={styles.app}>
-      <div className={styles.container}>
-        <div className={styles.appWrapper}>
-          <h1 className={styles.phonebookTitle}>Phonebook</h1>
-          <ContactForm onAddContact={handleAddContact} />
-          <h2 className={styles.contactsTitle}>Contacts</h2>
-          <Filter filter={filter} onFilterChange={handleFilterChange} />
-          <ContactList contacts={filteredContacts} onDeleteContact={handleDeleteContact} />
-        </div>
-      </div>
+    <div>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      <ul>
+        {contacts.map((contact) => (
+          <li key={contact.id}>
+            {contact.name} - {contact.number}
+            <button onClick={() => handleDeleteContact(contact.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const name = e.target.elements.name.value;
+          const number = e.target.elements.number.value;
+          handleAddContact({ name, number });
+        }}
+      >
+        <input type="text" name="name" placeholder="Name" required />
+        <input type="text" name="number" placeholder="Number" required />
+        <button type="submit">Add Contact</button>
+      </form>
     </div>
   );
 };
 
 export default App;
+
