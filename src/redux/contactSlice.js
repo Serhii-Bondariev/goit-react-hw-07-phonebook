@@ -22,21 +22,13 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-// export const toggleFavorite = createAsyncThunk(
-//   "contacts/toggleFavorite",
-//   async (contactId) => {
-//     const contact = await api.toggleFavorite(contactId);
-//     return contact;
-//   }
-// );
-
 const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
     items: [],
     isLoading: false,
     error: null,
-    filter: "", // Додайте поле filter в стан
+    filter: "",
   },
   reducers: {
     changeFilter: (state, action) => {

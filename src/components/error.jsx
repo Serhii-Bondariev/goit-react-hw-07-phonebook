@@ -1,4 +1,4 @@
-import { selectError } from 'redux/selectors';
+import { selectError, useSelector } from 'redux/selectors';
 
 const Error = () => {
   const error = useSelector(selectError);

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../redux/contactSlice';
-import { Button, Image } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 function Forms() {
   const dispatch = useDispatch();
@@ -71,17 +71,11 @@ function Forms() {
         />
       </Form.Group>
 
-      <Button variant="outline-primary" type="submit">
+      <Button className="mb-3" variant="outline-primary" type="submit">
         Add contact
       </Button>
 
-      {formData.addToFavorites && (
-        <Image
-          src="/path/to/favorite-icon.png"
-          alt="Favorite"
-          style={{ marginLeft: '10px' }}
-        />
-      )}
+      {formData.addToFavorites}
     </Form>
   );
 }

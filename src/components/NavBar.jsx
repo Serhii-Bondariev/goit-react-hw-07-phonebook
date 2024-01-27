@@ -1,32 +1,19 @@
 // NavBar.jsx
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Navbar from 'react-bootstrap/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
-import {
-  selectContacts,
-  selectFilter,
-  changeFilter,
-} from '../redux/contactSlice';
-
-// решта коду
+import { selectFilter, changeFilter } from '../redux/contactSlice';
 
 function NavBar() {
   const dispatch = useDispatch();
   const filter = useSelector(selectFilter);
 
-  const handleSearch = () => {
-    console.log('Searching for:', filter);
-  };
-
   return (
     <Navbar sticky="top" expand="lg" className="bg-body-tertiary">
       <Container className="d-flex me-auto">
-        <Navbar.Brand href="#">PhoneBook</Navbar.Brand>
-
+        <Navbar.Brand href="#home">PhoneBook</Navbar.Brand>
         <Form className="d-flex">
           <Form.Control
             type="search"

@@ -6,7 +6,14 @@ import Navbar from 'react-bootstrap/Navbar';
 function Footer() {
   return (
     <>
-      <Navbar bg="primary" data-bs-theme="light" sticky="bottom">
+      <Navbar
+        collapseOnSelect
+        // expand="lg"
+        className="bg-body-tertiary"
+        bg="light"
+        data-bs-theme="light"
+        sticky="bottom"
+      >
         <Container>
           <Navbar.Brand href="#home">PhoneBook</Navbar.Brand>
           <Row className="d-flex justify-content-around me-space">
