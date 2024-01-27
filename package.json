@@ -2,7 +2,7 @@
   "name": "react-homework-template",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Serhii-Bondariev.github.io/goit-react-hw-07-phonebook/",
+  "homepage": "https://serhii-bondariev.github.io/goit-react-hw-07-phonebook/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.16.3",
@@ -12,6 +12,7 @@
     "bootstrap": "^5.3.2",
     "formik": "^2.4.5",
     "nanoid": "^5.0.4",
+    "node": "^21.6.1",
     "normalize": "^0.3.1",
     "react": "^18.1.0",
     "react-bootstrap": "^2.10.0",
