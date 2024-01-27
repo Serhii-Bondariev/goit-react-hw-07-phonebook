@@ -36,9 +36,6 @@ function NavBar() {
             value={filter}
             onChange={e => dispatch(changeFilter(e.target.value))}
           />
-          <Button variant="outline-primary" onClick={handleSearch}>
-            Search
-          </Button>
         </Form>
       </Container>
     </Navbar>

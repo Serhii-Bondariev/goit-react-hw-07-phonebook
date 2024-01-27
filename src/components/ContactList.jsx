@@ -2,10 +2,12 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../redux/contactSlice';
-import Filter from './filter'; // Змінено імпорт
+import { deleteContact, toggleFavorite } from '../redux/contactSlice';
+import Filter from '../components/filter';
 import { selectVisibleContacts } from '../redux/selectors';
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
+
+// Ваш існуючий код
 
 function ContactList() {
   const dispatch = useDispatch();
@@ -17,11 +19,15 @@ function ContactList() {
 
   return (
     <div>
-      <Filter /> {/* Додано компонент фільтрації */}
+      <Filter />
+
       <ListGroup>
         {contacts.map(contact => (
           <ListGroup.Item key={contact.id}>
             {contact.name} - {contact.number}
+            {contact.addToFavorites && (
+              <span style={{ marginRight: '5px' }}>⭐</span>
+            )}
             <Button
               variant="danger"
               size="sm"
