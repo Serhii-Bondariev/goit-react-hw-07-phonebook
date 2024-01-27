@@ -23,7 +23,7 @@ function NavBar() {
   };
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar sticky="top" expand="lg" className="bg-body-tertiary">
       <Container className="d-flex me-auto">
         <Navbar.Brand href="#">PhoneBook</Navbar.Brand>
 

@@ -1,11 +1,25 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import Buttons from './Buttons';
-import { useDispatch } from 'react-redux';
-import { addContact } from '../redux/contactSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact, selectFilter } from '../redux/contactSlice';
+import { Button } from 'react-bootstrap';
+
+// Оновлений селектор для ефективного вибору відфільтрованих контактів
+import { createSelector } from 'reselect';
+import { selectContacts } from '../redux/contactSlice';
+
+const selectFilteredContacts = createSelector(
+  [selectContacts, selectFilter],
+  (contacts, filter) =>
+    contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    )
+);
 
 function Forms() {
   const dispatch = useDispatch();
+  const filteredContacts = useSelector(selectFilteredContacts);
+
   const [formData, setFormData] = useState({
     name: '',
     number: '',
@@ -25,10 +39,8 @@ function Forms() {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // Відправляємо дані для додавання контакту через Redux Thunk
     dispatch(addContact(formData));
 
-    // Скидаємо форму після відправки
     setFormData({
       name: '',
       number: '',
@@ -69,6 +81,10 @@ function Forms() {
           onChange={handleInputChange}
         />
       </Form.Group>
+
+      <Button variant="outline-primary" type="submit">
+        Add contact
+      </Button>
     </Form>
   );
 }

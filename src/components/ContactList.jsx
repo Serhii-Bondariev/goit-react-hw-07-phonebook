@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from '../redux/contactSlice';
 import Filter from './filter'; // Змінено імпорт
 import { selectVisibleContacts } from '../redux/selectors';
+import { Button } from 'react-bootstrap';
 
 function ContactList() {
   const dispatch = useDispatch();
@@ -21,9 +22,14 @@ function ContactList() {
         {contacts.map(contact => (
           <ListGroup.Item key={contact.id}>
             {contact.name} - {contact.number}
-            <button onClick={() => handleDeleteContact(contact.id)}>
+            <Button
+              variant="danger"
+              size="sm"
+              style={{ marginRight: '10px' }}
+              onClick={() => handleDeleteContact(contact.id)}
+            >
               Delete
-            </button>
+            </Button>
           </ListGroup.Item>
         ))}
       </ListGroup>

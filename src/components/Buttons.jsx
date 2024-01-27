@@ -7,7 +7,6 @@
 //   const dispatch = useDispatch();
 
 //   const handleAddContact = () => {
-//     // Додайте логіку для відкриття модального вікна чи іншої дії перед відправленням екшену
 //     dispatch(addContact(/* дані нового контакту */));
 //   };
 

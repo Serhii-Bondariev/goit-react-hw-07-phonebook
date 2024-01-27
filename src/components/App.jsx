@@ -14,11 +14,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('Dispatching fetchContacts');
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  console.log('Rendering App with isLoading:', isLoading);
 
   if (isLoading) {
     return <Loader />;

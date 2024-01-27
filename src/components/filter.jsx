@@ -10,14 +10,14 @@ const Filter = () => {
   return (
     <div>
       <h3>Find contacts by name </h3>
-      <input
+      {/* <input
         type="text"
         value={filter}
         onChange={e => {
           dispatch(changeFilter(e.target.value)); // Змінено setFilter на changeFilter
         }}
         placeholder="Enter name"
-      />
+      /> */}
     </div>
   );
 };
