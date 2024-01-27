@@ -69,8 +69,6 @@ function Forms() {
           onChange={handleInputChange}
         />
       </Form.Group>
-
-      <Buttons />
     </Form>
   );
 }

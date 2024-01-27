@@ -1,5 +1,4 @@
-import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import * as api from "../api/api";
 
 export const fetchContacts = createAsyncThunk("contacts/fetchAll", async () => {
@@ -29,8 +28,13 @@ const contactsSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
+    filter: "", // Додайте поле filter в стан
   },
-  reducers: {},
+  reducers: {
+    changeFilter: (state, action) => {
+      state.filter = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
@@ -75,8 +79,8 @@ const contactsSlice = createSlice({
   },
 });
 
-export const changeFilter = createAction("contacts/changeFilter");
-export const { reducer: contactsReducer } = contactsSlice;
+export const { reducer: contactsReducer, actions } = contactsSlice;
+export const { changeFilter } = actions;
 export const selectContacts = (state) => state.contacts.items;
 export const selectIsLoading = (state) => state.contacts.isLoading;
 export const selectError = (state) => state.contacts.error;
