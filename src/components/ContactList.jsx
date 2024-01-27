@@ -1,17 +1,24 @@
-import ListGroup from 'react-bootstrap/ListGroup';
+// ContactList.jsx
+import React from 'react';
+import { ListGroup } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { selectVisibleContacts } from 'redux/selectors';
+import { selectVisibleContacts } from '../redux/selectors';
 
-function ContactList() {
+const ContactList = () => {
   const contacts = useSelector(selectVisibleContacts);
 
   return (
-    <ListGroup as="ul" className="list-group-flush mt-4">
-      <ListGroup.Item as="li" active>
-        {contacts.map(item => ContactItem)}
-      </ListGroup.Item>
-    </ListGroup>
+    <div>
+      <h2>Contacts</h2>
+      <ListGroup>
+        {contacts.map(contact => (
+          <ListGroup.Item key={contact.id}>
+            {contact.name} - {contact.phone}
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </div>
   );
-}
+};
 
 export default ContactList;

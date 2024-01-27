@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { contactsReducer } from "./contactSlice";
+import { contactsReducer } from "./contactSlice"; // Замініть на вірний шлях
 
 export const store = configureStore({
   reducer: {

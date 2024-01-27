@@ -1,9 +1,7 @@
-import { Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Forms from './Forms';
 import Logo from '../Images/Phonebook_logo.png';
-import ContactsDropdown from './ContactsDropdown';
-import ContactList from './ContactList';
-// import ContactList from './ContactList';
+import { addContact } from '../redux/contactSlice';
 
 const ContactCard = () => {
   return (
@@ -18,7 +16,6 @@ const ContactCard = () => {
         <Card.Body>
           <Card.Title>Add new contact</Card.Title>
           <Forms />
-          <ContactList />
         </Card.Body>
       </Card>
     </div>

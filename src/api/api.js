@@ -1,32 +1,18 @@
 import axios from "axios";
 
-const apiBaseUlr = axios.create({
-  baseUrl: "https://65b2b0609bfb12f6eafe48ad.mockapi.io/",
-});
+const BASE_URL = "https://65b2b0609bfb12f6eafe48ad.mockapi.io"; // Замініть це на ваш URL сервера
 
 export const fetchContacts = async () => {
-  try {
-    const { data } = await apiBaseUlr.get("/contacts");
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.get(`${BASE_URL}/contacts/`);
+  return response.data;
 };
 
 export const addContact = async (contact) => {
-  try {
-    const { data } = await apiBaseUlr.post("/contacts", contact);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.post(`${BASE_URL}/contacts`, contact);
+  return response.data;
 };
 
 export const deleteContact = async (contactId) => {
-  try {
-    const { data } = await apiBaseUlr.delete(`/contacts/${contactId}`);
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  const response = await axios.delete(`${BASE_URL}/contacts/${contactId}`);
+  return response.data;
 };
