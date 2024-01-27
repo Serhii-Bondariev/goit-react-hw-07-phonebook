@@ -14,7 +14,7 @@ function Footer() {
               <Nav.Link href="#https://github.com/Serhii-Bondariev">
                 GitHub
               </Nav.Link>
-              <Nav.Link href="#features">LinkedIn</Nav.Link>
+              <Nav.Link href="#54b0f7tures">LinkedIn</Nav.Link>
               {/* <p className="text-muted">© 2024 Created by Bondariev Serhii </p> */}
             </Nav>
           </Row>

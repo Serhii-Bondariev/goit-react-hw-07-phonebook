@@ -1,24 +1,32 @@
-// ContactList.jsx
+// ContactList.js
+
 import React from 'react';
-import { ListGroup } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from '../redux/contactSlice';
 import { selectVisibleContacts } from '../redux/selectors';
 
-const ContactList = () => {
+function ContactList() {
+  const dispatch = useDispatch();
   const contacts = useSelector(selectVisibleContacts);
 
+  const handleDeleteContact = contactId => {
+    // Видаляємо контакт через Redux Thunk
+    dispatch(deleteContact(contactId));
+  };
+
   return (
-    <div>
-      <h2>Contacts</h2>
-      <ListGroup>
-        {contacts.map(contact => (
-          <ListGroup.Item key={contact.id}>
-            {contact.name} - {contact.phone}
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-    </div>
+    <ListGroup>
+      {contacts.map(contact => (
+        <ListGroup.Item key={contact.id}>
+          {contact.name} - {contact.number}
+          <button onClick={() => handleDeleteContact(contact.id)}>
+            Delete
+          </button>
+        </ListGroup.Item>
+      ))}
+    </ListGroup>
   );
-};
+}
 
 export default ContactList;

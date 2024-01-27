@@ -24,10 +24,10 @@ const App = () => {
     <div className="App">
       <NavBar />
 
-      {/* <ContactForm /> */}
-      <ContactCard />
+      <ContactForm />
+      {/* <ContactCard /> */}
       <ContactList />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
