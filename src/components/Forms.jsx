@@ -1,21 +1,33 @@
-// Forms.jsx
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../redux/contactSlice';
 import { Button } from 'react-bootstrap';
+import { selectContacts } from '../redux/selectors';
 
 function Forms() {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+
   const [formData, setFormData] = useState({
     name: '',
     number: '',
     addToFavorites: false,
   });
 
+  const nameRegex = /^[a-zA-Zа-яА-ЯіІїЇєЄёЁ' -]+$/; // Регулярний вираз для імен
+  const numberRegex = /^[0-9]+$/; // Регулярний вираз для номерів
+
   const handleInputChange = e => {
     const { name, value, type, checked } = e.target;
-    const inputValue = type === 'checkbox' ? checked : value;
+    let inputValue = type === 'checkbox' ? checked : value;
+
+    // Валідація для імен і номерів
+    if (name === 'name' && !nameRegex.test(inputValue)) {
+      inputValue = formData.name; // Не оновлюємо значення, якщо не відповідає регулярному виразу
+    } else if (name === 'number' && !numberRegex.test(inputValue)) {
+      inputValue = formData.number; // Не оновлюємо значення, якщо не відповідає регулярному виразу
+    }
 
     setFormData(prevData => ({
       ...prevData,
@@ -25,6 +37,18 @@ function Forms() {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    // Перевірка, чи існує контакт із таким ім'ям чи номером
+    const existingContact = contacts.find(
+      contact =>
+        contact.name.toLowerCase() === formData.name.toLowerCase() ||
+        contact.number === formData.number
+    );
+
+    if (existingContact) {
+      alert('Цей контакт вже існує!');
+      return; // Не додаємо контакт, якщо він вже існує
+    }
 
     // Відправляємо дані для додавання контакту через Redux Thunk
     dispatch(addContact(formData));
