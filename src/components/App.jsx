@@ -4,7 +4,6 @@ import { fetchContacts } from '../redux/contactSlice';
 import ContactCard from './ContactCard';
 import Footer from './Footer';
 import NavBar from './NavBar';
-import Loader from './Loader';
 import { Card } from 'react-bootstrap';
 
 const App = () => {
@@ -14,10 +13,6 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
 
   return (
     <div className="App">

@@ -16,7 +16,7 @@ function Forms() {
   });
 
   const nameRegex = /^[a-zA-Zа-яА-ЯіІїЇєЄёЁ' -]+$/; // Регулярний вираз для імен
-  const numberRegex = /^[0-9]+$/; // Регулярний вираз для номерів
+  const phoneRegex = /^[0-9]+$/; // Регулярний вираз для номерів
 
   const handleInputChange = e => {
     const { name, value, type, checked } = e.target;
@@ -25,8 +25,8 @@ function Forms() {
     // Валідація для імен і номерів
     if (name === 'name' && !nameRegex.test(inputValue)) {
       inputValue = formData.name; // Не оновлюємо значення, якщо не відповідає регулярному виразу
-    } else if (name === 'number' && !numberRegex.test(inputValue)) {
-      inputValue = formData.number; // Не оновлюємо значення, якщо не відповідає регулярному виразу
+    } else if (name === 'phone' && !phoneRegex.test(inputValue)) {
+      inputValue = formData.phone; // Не оновлюємо значення, якщо не відповідає регулярному виразу
     }
 
     setFormData(prevData => ({
@@ -42,7 +42,7 @@ function Forms() {
     const existingContact = contacts.find(
       contact =>
         contact.name.toLowerCase() === formData.name.toLowerCase() ||
-        contact.number === formData.number
+        contact.phone === formData.phone
     );
 
     if (existingContact) {
@@ -56,7 +56,7 @@ function Forms() {
     // Скидаємо форму після відправки
     setFormData({
       name: '',
-      number: '',
+      phone: '',
       addToFavorites: false,
     });
   };
@@ -75,12 +75,12 @@ function Forms() {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Number</Form.Label>
+        <Form.Label>Phone</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Number"
-          name="number"
-          value={formData.number}
+          placeholder="Phone number"
+          name="phone"
+          value={formData.phone}
           onChange={handleInputChange}
         />
       </Form.Group>
